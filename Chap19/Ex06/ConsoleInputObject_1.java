@@ -1,4 +1,4 @@
-package Chap19.Ex06;
+ package Chap19.Ex06;
 
 import java.io.IOException;
 import java.io.InputStream;

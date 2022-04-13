@@ -1,31 +1,38 @@
 package Ex;
 
-import java.util.NavigableSet;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Solution {
 	
-	public long solution(long n) {
-		long answer=0;
-		
-		String str= String.valueOf(n);
-		String[] arr1= str.split("");
-		
-				
- //		NavigableSet<Long> n1 = new TreeSet<Long>();
-//		n1.add(s);
-//		n1.descendingIterator();
-		
-		
-		
-		
-		
-		return s;
-		
+	 public int[] solution(int[] arr) {
+	        int[] answer= {}; 
+	        int max=0;
+	        ArrayList<Integer> arrli= new ArrayList<>();
+	        for(int i=0; i<arr.length; i++) {
+	        	if(arr[i]>max) {
+	        		max=arr[i];
+	        	}
+	        }
+	        //값이 5인 애들 인덱스 번호를 가져와야한다.
+	        for(int i =0; i<arr.length; i++) {
+	        	if(arr[i]==max) {
+	        		arrli.add(i);
+	        	}
+	        }
+	        for(int i=0; i<arrli.size(); i++) {
+	        	answer[i]=arrli.get(i);
+	        }
+	        
+	        
+	        return answer;
+	        
     }
 	public static void main(String[] args) {
 		Solution sol =new Solution();
-		System.out.println(sol.solution(118372));
+		int[] a =new int[] {1,2,3,4,5};
+		System.out.println(sol.solution(a));
 	}
 }

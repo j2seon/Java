@@ -21,44 +21,37 @@ import java.nio.charset.Charset;
 public class Ex06_ConsoleInputOutPutObject {
 
 	public static void main(String[] args) throws IOException {
-		//1.인풋
+		//1.콘솔에서 한글을 인풋받는다. < byte[]배열을 생성해서 처리 : 한글을 처리
+		InputStream is1 =System.in;   //new로 생성하지 않고 연결만 설정, 콘솔에서 인풋값을 받는다.
 		System.out.println("한글을 입력하세요");
-		InputStream is1 =System.in;   
 		byte[] b1 =new byte[100];
-		int count1=is1.read(b1);
-		String str1 = new String(b1,0,count1,Charset.defaultCharset());
-		
-		
+		int count1=is1.read(b1); //b1에 byte로 \r\n ,count1 배열에 값이 들어온 갯수!.
+		//int data = re.read() 한글처리를 못한다. data에는 1bye
+//		String str1 = new String(b1,0,count1,Charset.defaultCharset());
 		
 		// 파일에 해당 값을 저장 
 		File outFile = new File("src/Chap19/Ex06/input.txt");
-		FileOutputStream os = new FileOutputStream(outFile,false);
-		os.write(b1);
-		os.flush();
+		FileOutputStream os = new FileOutputStream(outFile); //덮어쓰기
+		os.write(b1);		//버퍼(Ram)에만 쓰여짐.
+		os.flush();//버퍼에 쓰인내용을 파일에 저장
 		
 		//저장된 파일 파일 내용 읽기
-		byte b2[]=new byte[100];
-		int count2;
-		String str2=null;
-		try (InputStream is2= new FileInputStream(outFile)){
-			while((count2=is2.read(b2))!=-1) {
-				str2= new String(b2, 0, count2, Charset.defaultCharset());
-			}
-		}catch (IOException e) {
-			System.out.println("오류입니다.");
-		}
+		InputStream fis =new FileInputStream(outFile);
+		
+		byte[] b2= new byte[100];
+	
+		int count2=fis.read(b2);
+		
 		
 		//콘솔에 출력하기
-		System.out.println(str2);
-		System.out.println("출력결과 >> ");
-		OutputStream out = System.out;
-		byte[] b3 = str2.getBytes(Charset.defaultCharset());
-//		out.write(b3);
-		out.flush();
+		OutputStream os2 =System.out;
+		os.write(b2);
+		os.flush();
+		
 		is1.close();
-		out.close();
-		
-		
+		os.close();
+		os2.close();
+		fis.close();
 		
 		
 		
