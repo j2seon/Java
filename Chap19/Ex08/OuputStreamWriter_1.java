@@ -19,6 +19,11 @@ public class OuputStreamWriter_1 {
 		File osw1 = new File("src\\Chap19\\Ex08\\osw1.txt");	//MS949
 		File osw2 = new File("src\\Chap19\\Ex08\\osw2.txt");  //UTF-8
 		
+		//이클립스말고 외부에 저장하면 잘 적용된다.
+//		File osw1 = new File("C:\\temp\\osw1.txt");	//MS949
+//		File osw2 = new File("C:\\temp\\osw2.txt");
+		
+		
 		try (Writer writer = new FileWriter(osw1);){
 			
 			writer.write("OuputStreamWriter1 예제 파일입니댜ㅏ \n".toCharArray());  //String을 char 배열에 저장.

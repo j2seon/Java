@@ -15,7 +15,7 @@ import java.io.Writer;
 		char:2byte,UTf-16(유니코드)로 처리, 영문 2byte 한글2byte ,고정길이, 전세계 모든 언어를 처리
 		
 		FileReader : charset 지정옵션이 없다. default charset 사용 
-		FileWriter : 
+		FileWriter : charset 지정옵션이 없다. default charset 사용
 
 	 */
 public class File_Reader_Writer {
