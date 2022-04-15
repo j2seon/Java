@@ -36,16 +36,21 @@ class Student{
 		this.money = money;
 	}
 	
-	public void takeBus(Bus bus) { //학생이 버스를 탔을 때 ? 버스에 돈을 지불해야한다.
+	public void takeBus(Bus bus) { //학생이 버스를 탔을 때  버스에 돈을 지불해야한다.
 		bus.take(1000);
+		this.money-=1000;
+		bus.getBusName();
+		
 		
 	}
 	public void takeOutBus(Bus bus) {
 		
 	}
 	
-	public void takeSubway(Subway subway) { //지하철 탈때
+	public void takeSubway(Subway subway) { //지하철 탈때 지하철에 돈 지불
 		subway.take(1500);
+		this.money-=1500;
+		subway.getLineNumber();
 	}
 	public void takeOutSubway(Subway subway) { //지하철 내릴때
 		
@@ -72,15 +77,28 @@ class Student{
 
 class Bus{
 	int busName;	//100번 버스, 200번 버스  <==인풋값을 받아서, 생성자로
+
 	int passengerCount; //승객 수 
 	int money;
 	
+//	public Bus(int busName) {
+//		this.busName=busName;
+//	}
+	public void setBusName(int busName) {
+		this.busName = busName;
+	}
+	
+	public int getBusName() {
+		return busName;
+	}
 	public void take(int money) { //버스의 수입을 처리, 승객수를 처리 
+		this.money=money;
+		this.passengerCount++;
 		
 	}
 	
 	public void takeOut() { //버스 승객수만 감소
-		
+		this.passengerCount--;
 	}
 }
 
@@ -91,16 +109,29 @@ class Subway{
 	
 	//생성자를 통해서 지하철 호선을 인풋받아서 활성화,
 	
+//	public Subway(String lineNumber) {
+//		this.lineNumber=lineNumber;
+//	}
+	public String getLineNumber() {
+		return lineNumber;
+	}
+	
+	public void setLineNumber(String lineNumber) {
+		this.lineNumber = lineNumber;
+	}
+
 	public void take(int money) { //지하철의 수입을 처리, 승객수를 처리 
-			
+		this.money=money;
+		this.passengerCount++;
 	}
 	public void takeOut() { //지하철 승객수만 감소
+		this.passengerCount--;
 		
 	}
 }
 
 
-public class CooperationBetwwenObject {
+public class CooperationBetweenObject {
 
 	
 	public static void main(String[] args) {
@@ -108,45 +139,9 @@ public class CooperationBetwwenObject {
 		ArrayList<Student> studentList = new ArrayList<>();
 		Scanner scanner= new Scanner(System.in);
 		boolean run=true;
-		/*
-		학생 5명 입력 : 학생당 100,000만원 초기값 할당. 
-		=============================================
-		1. 학생객체 생성  | 2. 학생정보 출력 및 선택  
-		3. 버스를 탐 |  4.  버스를 내림 5. 지하철을 탐 , 6. 지하철을 내림.   7. 종료  
-		=============================================
-		선택>> 1
-		학생이름  : 
-		 돈 입력   : 
-
-		선택>> 2 
-		=====학생정보 출력=====
-		학생이름	가진돈
-
-
-
-		학생선택(이름입력)>> 
-
-
-		선택>> 3
-		000 님 000 번 버스를 탔습니다. 즐거운 하루되세요. 
-		000 님의 남은돈은 000 입니다. 
-		버스 000번의 승객은 000명이고 수입은000 입니다. 
-
-		선택>> 4
-		000 님 000 번 버스를 내렸습니다. 굿바이~~~. 
-		000 님의 남은돈은 000 입니다. 
-		버스 00번의 승객은 000명이고 수입은 000 입니다. 
-
-		선택>> 5
-		000 님 000 호선 지하철를 탔습니다. 즐거운 하루되세요. 
-		000 님의 남은돈은 000 입니다. 
-		지하철 00 호선의 승객은 00명이고 수입은  000 입니다. 
-
-		선택>> 6
-		000 님 000 호선 지하철를 내렸습니다. 안녕 ~~~
-		000 님의 남은돈은 000 입니다. 
-		지하철 00 호선의 승객은 00명이고 수입은  000 입니다. 
-		*/ 
+		Student str = null ;
+		Bus bus= new Bus();
+		Subway subway = new Subway();
 		
 		
 		while(run) {
@@ -156,7 +151,6 @@ public class CooperationBetwwenObject {
 			System.out.println("===================================================================");
 			System.out.println("선택 >> ");
 			int choice =scanner.nextInt();
-			Student str=null;
 			if(choice==1) {
 				boolean a = true;
 				while(a) {
@@ -183,23 +177,62 @@ public class CooperationBetwwenObject {
 				String seletname= scanner.next();
 				for(int i=0; i<studentList.size(); i++) {
 					Student student = studentList.get(i);
-					if(student.getStudentName().equals(seletname)){
+					if(student.studentName.equals(seletname)){
 						str=student;
+					
 					}
 				}
 			}else if(choice==3){
-				System.out.println(str.getStudentName()+"님");
+				System.out.print("타려는 버스번호 : ");
+				int bunum=scanner.nextInt();
+				bus.setBusName(bunum);
+				for(Student s : studentList) {
+					if(s.studentName.equals(str.getStudentName())) {
+						s.takeBus(bus);
+						System.out.println(s.studentName+"님"+bus.getBusName()+"번 버스를 탔습니다. 즐거운 하루되세요");
+						System.out.println(s.studentName+"님의 남은 돈은 "+s.money+"입니다.");
+						System.out.println("버스 "+bus.getBusName()+"번의 승객은 "+ bus.passengerCount+"명이고 수입은 "+ bus.money+"입니다.");
+					}
+				}
+			
 			}else if(choice==4){
+				for(Student s : studentList) {
+					if(s.studentName.equals(str.getStudentName())) {
+						s.takeOutBus(bus); bus.takeOut();
+						System.out.println(s.studentName+"님"+bus.getBusName()+"번 버스에서 내렸습니다. 굿바이~~~");
+						System.out.println(s.studentName+"님의 남은 돈은 "+s.money+"입니다.");
+						System.out.println("버스 "+bus.getBusName()+"번의 승객은 "+ bus.passengerCount+"명이고 수입은 "+ bus.money+"입니다.");
+					}
+				}
 				
 			}else if(choice==5){
-				
+				System.out.print("타려는 호선 : ");
+				String linenum=scanner.next();
+				subway.setLineNumber(linenum);
+				for(Student s : studentList) {
+					if(s.studentName.equals(str.getStudentName())) {
+						s.takeSubway(subway);
+						System.out.println(s.studentName+"님"+subway.getLineNumber()+"호선 지하철를 탔습니다. 즐거운 하루되세요.");
+						System.out.println(s.studentName+"님의 남은 돈은 "+s.money+"입니다.");
+						System.out.println("지하철 "+subway.getLineNumber()+"호선의 승객은 "+ subway.passengerCount+"명이고 수입은 "+ subway.money+"입니다.");
+					}
+				}
 			}else if(choice==6){
-				
+				for(Student s : studentList) {
+					if(s.studentName.equals(str.getStudentName())) {
+						s.takeOutSubway(subway); subway.takeOut();
+						System.out.println(s.studentName+"님"+subway.getLineNumber()+"호선 지하철에서 내렸습니다. 굿바이~~~");
+						System.out.println(s.studentName+"님의 남은 돈은 "+s.money+"입니다.");
+						System.out.println("지하철 "+subway.getLineNumber()+"호선의 승객은 "+subway.passengerCount +"명이고 수입은 "+ subway.money+"입니다.");
+					}
+				}
 			}else if(choice==7){
 				break;
 			}
 			
 		}
+		scanner.close();
+		System.out.println("프로그램을 종료합니다.");
 		
 	}
 
