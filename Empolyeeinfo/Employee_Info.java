@@ -86,6 +86,14 @@ class Employee implements Comparable<Employee>{
 	}
 }
 
+
+//TreeSet : 중복된 데이터를 저장할 수 없다. wrapper 클래스는 재정의 되어 있다 . equals(), hashCode()
+	//정렬되어서 저장,
+		//일반 객체를 set 자료형에 저장할때는 객체의 특ㄱ정 필드가 중복저장되지 않도록 equals(), hashCode()재정의 필요
+	//wrapper  : 기본자료형을 객체의 기본자료형에는 없는 메소드가 추가.
+		//Comparable compareTo(): 상속해서 구현, 기존 객체수정이 필요, Comparator compare()가 재정의 되어있다.
+
+
 public class Employee_Info {	
 	public static Scanner scanner = new Scanner(System.in);
 	public static TreeSet<Employee> arr= new TreeSet<>();
