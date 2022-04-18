@@ -3,6 +3,8 @@ package fruit_ex;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+
 /*
  * 상속을 다루는 문제 하위의 생성자에 super() 값을 넣으면된다.
  * 
@@ -13,104 +15,95 @@ import java.util.Scanner;
 */
 
 class Fruit {
-	String fruitName; //과일 이름
-	String color;		//과일의 색깔
-	int large;  		//과일의 크기
-	public String getFruitName() {
-		return fruitName;
-	}
+	String name;
+	String color;
+	int large;
 
-	public void setFruitName(String fruitName) {
-		this.fruitName = fruitName;
-	}
-
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
-	}
-
-	public int getLarge() {
-		return large;
-	}
-
-	public void setLarge(int large) {
-		this.large = large;
-	}
-
-	
-	public Fruit(String fruitName,String color,int large ) {
-		this.fruitName=fruitName;
+	public Fruit(String name,String color,int large) {
+		this.name = name;
 		this.color=color;
-		this.large=large;
-	}
-	
-	public String showInfo() { //과일의 정보를 출력하는 메소드
+		this.large=large;			
 		
-		
-		return "";
 	}
 
 	@Override
 	public String toString() {
-		return "과일의 이름 : <"+fruitName+">이고, 색깔은 <"+color+">이고, 크기는 <"+large+">입니다."  ;
+		return "과일의 이름 : <"+name+">이고, 색깔은 <"+color+">이고, 크기는 <"+large+"> 입니다.";
 	}
-
+	
+	
 }
 
-class Apple extends Fruit{
+class apple extends Fruit{
 
-	public Apple(String fruitName, String color, int large) {
-		super(fruitName, color, large);
+	public apple(String name, String color, int large) {
+		super(name, color, large);
+	
 	}
 }
-
 class Orange extends Fruit{
 
-	public Orange(String fruitName, String color, int large) {
-		super(fruitName, color, large);
+	public Orange(String name, String color, int large) {
+		super(name, color, large);
 	}
 }
 
 class bananan extends Fruit{
 
-	public bananan(String fruitName, String color, int large) {
-		super(fruitName, color, large);
+	public bananan(String name, String color, int large) {
+		super(name, color, large);
 	}
 }
 
 
+
 public class Fruit_Test {
+	
+	public static Scanner scanner = new Scanner(System.in);
+	public static ArrayList<Fruit> arr = new ArrayList<Fruit>();
+	
+	public static void addApple() {
+		System.out.print("과일명 : ");
+		String name=scanner.next();
+		System.out.print("색깔 : ");
+		String color=scanner.next();
+		System.out.print("크기 : ");
+		int size=scanner.nextInt();
+		apple apple1 = new apple(name, color, size);
+		arr.add(apple1);
+	}
+	public static void addOrange() {
+		System.out.print("과일명 : ");
+		String name=scanner.next();
+		System.out.print("색깔 : ");
+		String color=scanner.next();
+		System.out.print("크기 :");	
+		int size=scanner.nextInt();
+		Orange orange = new Orange(name, color, size);
+		arr.add(orange);
+		
+		
+	}
+	public static void addBanana() {
+		System.out.print("과일명 :");
+		String name=scanner.next();
+		System.out.print("색깔 : ");
+		String color=scanner.next();
+		System.out.print("크기 : ");
+		int size=scanner.nextInt();
+		bananan bananana = new bananan(name, color, size);
+		arr.add(bananana);
+	}
+	
+	public static void showInfo() {
+		for(Fruit fruit : arr) {
+			System.out.println(fruit);
+		}
+		
+	}
+	
 
 	public static void main(String[] args) {
-		/*
-		 * 1. 코드작성 : 스캐너를 인풋받는 코드 작성
-		 * 선택 >> 1
-		 * ===============================================
-		 * 1.사과		|	2.오렌지		| 3. 바나나  | 4. 정보 출력 | 5. 프로그램 종료
-		 * ===============================================
-		 * 
-		 * 선택 >> 1 
-		 * 과일명:
-		 * 색깔 : 
-		 * 크기 :
-		 * 
-		 * */
-		
-		//2. 코드 작성 : 스캐너로 인풋받은 값으로 각각의 객체를 생성해서 ArrayList에 저장.
-		
-		/*
-		3. 선택 >> 4 객체를 가져와서 객체를 출력했을 때  ArrayListr의 모든 객체를 출력
-			출력결과 : 
-				과일의 이름 : <사과>이고, 색깔은 <빨간색이고>, 크기는 <10>입니다.
-		*/
-		
-		
-		
-		ArrayList<Fruit> fruitlist = new ArrayList<Fruit>();
-		Scanner scanner = new Scanner(System.in);
 		boolean run= true;
 		while(run) {
 			System.out.println("===========================================================");
@@ -118,39 +111,25 @@ public class Fruit_Test {
 			System.out.println("===========================================================");
 			System.out.println("선택 >>");
 			
-			
-			int choice = scanner.nextInt();
-			
-			if(choice==1) {
-				Fruit apple = new Apple("사과", "빨간색", 35);
-				System.out.println("과일명 : "+ apple.getFruitName());
-				System.out.println("색깔 : "+ apple.getColor());
-				System.out.println("크기 : "+ apple.getLarge());
-				fruitlist.add(apple);
-			}else if(choice==2) {
-				Fruit orange = new Orange("오렌지", "주황색", 5);
-				System.out.println("과일명 : "+ orange.getFruitName());
-				System.out.println("색깔 : "+ orange.getColor());
-				System.out.println("크기 : "+ orange.getLarge());
-				fruitlist.add(orange);
-			}else if(choice==3) {
-				Fruit banana = new Apple("바나나", "노랑색", 3);
-				System.out.println("과일명 : "+ banana.getFruitName());
-				System.out.println("색깔 : "+ banana.getColor());
-				System.out.println("크기 : "+ banana.getLarge());
-				fruitlist.add(banana);
-			}else if(choice==4) {
-				System.out.println("출력 결과 : ");
-				for(Fruit a : fruitlist) {
-					System.out.println(a);
+				int choice = scanner.nextInt();
+				switch(choice) {
+				case 1:
+					addApple();					
+					break;
+				case 2:addOrange();
+					break;
+				case 3:addBanana();
+					break;
+				case 4:
+					showInfo();
+					break;
+				case 5:
+					run=false;
+					break;
 				}
-			}else if(choice==5) {
-				break;
-			}	
-		}
+			}
 		scanner.close();
-		System.out.println("프로그램 종료");
-		
+		System.out.println("프로그램을 종료합니다.");
+		}
 	}
 
-}
